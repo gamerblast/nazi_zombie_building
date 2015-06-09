@@ -173,11 +173,11 @@ blood_pump(perk_pad, perk_pump_trig, perk_trig, perk2_trig, perk_machine, perk_m
 			{
 				player thread check_revive();
 				player waittill_any("player_revived", "bled_out");
-				if(self.revived == 1)
+				if(player.revived == 1)
 				{
 					player GiveWeapon( gun_store );
 					player SwitchToWeapon( gun_store );
-					self.revived = 0;
+					player.revived = 0;
 				}
 				player.yolo = 0;
 			}
