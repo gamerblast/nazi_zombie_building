@@ -113,6 +113,7 @@ maps\_jug2.gsc
 maps\_laststand.gsc
 maps\_loadout.gsc
 maps\_speed2.gsc
+maps\_tides.gsc
 maps\_zombiemode.gsc
 maps\_zombiemode_dogs.gsc
 maps\_zombiemode_perks.gsc
@@ -131,7 +132,6 @@ maps\zom_counter.gsc
 mod.arena
 mod.csv
 sound\music_mainmenu\garbar_loop.wav
-ui\options_msm.menu
 weapons\sp\dp28_bipod_stand
 weapons\sp\stielhandgranate
 weapons\sp\zombie_an94

@@ -1,3 +1,4 @@
+fx,maps/zombie/fx_zombie_tesla_shock
 rawfile,aitype/axis_zombie_ger_ber_sshonor.gsc
 character,bo1_nazi_body.gsc
 character,bo1_nazi_body.gsc
@@ -118,9 +119,9 @@ weapon,sp/Stielhandgranate
 material,msmbackground
 menufile,ui/hud.menu
 menufile,ui/nazi_zombie_building.menu
-menufile,ui/options_msm.menu
 menufile,ui/options_graphics_pc.menu
 menufile,ui/options_game_pc.menu
+menufile,ui/options_msm.menu
 sound,menu_music,,all_sp
 xmodel,cannonballtres
 xmodel,viewmodel_hk416
@@ -249,4 +250,3 @@ rawfile,maps\_laststand.gsc
 rawfile,maps\_debug.gsc
 stringtable,maps/mapsTable.csv
 localize,mod,,
-menufile,ui/nazi_zombie_building.menu
