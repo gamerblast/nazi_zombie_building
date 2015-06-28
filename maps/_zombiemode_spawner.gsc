@@ -262,7 +262,7 @@ set_zombie_run_cycle()
 		self.run_combatanim = level.scr_anim[self.animname]["run" + var];
 		break;
 	case "sprint":                             
-		rand = randomintrange(1, 21);
+		rand = randomintrange(1, 22);
 		var = 1;
 		if(rand <= 17) {
 			var = 1;
