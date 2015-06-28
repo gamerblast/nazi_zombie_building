@@ -123,6 +123,7 @@ main()
 	level thread maps\perk_upgrade_system::main();
 	level thread maps\_jug2::main();
 	level thread maps\_cannon::main();
+	level thread maps\_tides::main();
 	
 	/*--------------------
 	 ZOMBIE MODE

@@ -29,21 +29,17 @@ exo_jump()
 		{
 			while(self isOnGround() == 0)
 			{
-				if(self useButtonPressed() && self.is_exo_jumping == 0 && self.exo_strength >= 20)
+				if(self useButtonPressed() && self.exo_strength >= 10)
 				{
 					self.is_exo_jumping = 1;
-					self.exo_strength -= 20;
+					self.exo_strength -= 10;
+					self SetVelocity((0, 0, 200));
 					
-					for(i=0; i<5; i++)
-					{
-						self SetVelocity((0, 0, 1000));
-						wait(0.05);
-					}
-					wait(0.05);
+					wait(0.1);
 				}
 				else
 				{
-					wait(0.05);
+					wait(0.1);
 				}
 			}
 			self.is_exo_jumping = 0;
@@ -65,61 +61,61 @@ exo_boost()
 			while(self isOnGround() == 0)
 			{
 				movement = self GetNormalizedMovement();
-				if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[0] == 1 && self.exo_strength >= 15)
+				if(self AdsButtonPressed() && movement[0] == 1 && self.exo_strength >= 5)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 15;
+					self.exo_strength -= 5;
 					
 					angles = self GetPlayerAngles();
 					angle = 90 - angles[1];
 					
-					x = Sin(angle) * 1000;
-					y = Cos(angle) * 1000;
+					x = Sin(angle) * 200;
+					y = Cos(angle) * 200;
 					self setVelocity((x, y, 0));
-					wait(0.05);
+					wait(0.1);
 				}
-				else if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[0] == -1 && self.exo_strength >= 15)
+				else if(self AdsButtonPressed() && movement[0] == -1 && self.exo_strength >= 5)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 15;
+					self.exo_strength -= 5;
 					
 					angles = self GetPlayerAngles();
 					angle = 90 - angles[1];
 					
-					x = -1 * (Sin(angle) * 1000);
-					y = -1 * (Cos(angle) * 1000);
+					x = -1 * (Sin(angle) * 200);
+					y = -1 * (Cos(angle) * 200);
 					self setVelocity((x, y, 0));
-					wait(0.05);
+					wait(0.1);
 				}
-				else if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[1] == 1 && self.exo_strength >= 15)
+				else if(self AdsButtonPressed() && movement[1] == 1 && self.exo_strength >= 5)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 15;
+					self.exo_strength -= 5;
 					
 					angles = self GetPlayerAngles();
 					angle = angles[1] - 90;
 					
-					x = Cos(angle) * 1000;
-					y = Sin(angle) * 1000;
+					x = Cos(angle) * 200;
+					y = Sin(angle) * 200;
 					self setVelocity((x, y, 0));
-					wait(0.05);
+					wait(0.1);
 				}
-				else if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[1] == -1 && self.exo_strength >= 15)
+				else if(self AdsButtonPressed() && movement[1] == -1 && self.exo_strength >= 5)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 15;
+					self.exo_strength -= 5;
 					
 					angles = self GetPlayerAngles();
 					angle = angles[1] - 90;
 					
-					x = -1 * (Cos(angle) * 1000);
-					y = -1 * (Sin(angle) * 1000);
+					x = -1 * (Cos(angle) * 200);
+					y = -1 * (Sin(angle) * 200);
 					self setVelocity((x, y, 0));
-					wait(0.05);
+					wait(0.1);
 				}
 				else
 				{
-					wait(0.05);
+					wait(0.1);
 				}
 			}
 			self.is_exo_boosting = 0;
@@ -173,10 +169,10 @@ exo_recharge()
 {
 	while(1)
 	{
-		if(self.hasjug2 == 1 && self.exo_strength < 100)
+		if(self.hasjug2 == 1 && self.exo_strength < 100 && self.is_exo_boosting == 0 && self.is_exo_jumping == 0)
 		{
 			self.exo_strength += 1;
-			wait(1.8);
+			wait(0.05);
 		}
 		else
 		{
