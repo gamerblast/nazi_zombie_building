@@ -121,6 +121,7 @@ main()
 	level thread maps\_speed2::main();
 	level thread maps\_better_pump::main();
 	level thread maps\perk_upgrade_system::main();
+	level thread maps\specialists_system::main();
 	level thread maps\_jug2::main();
 	level thread maps\_cannon::main();
 	level thread maps\_tides::main();

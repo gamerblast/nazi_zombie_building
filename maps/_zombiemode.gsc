@@ -2622,7 +2622,11 @@ remove_ignore_attacker()
 player_damage_override( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, modelIndex, psOffsetTime )
 {
 	if( sMeansOfDeath == "MOD_FALLING" )
-	 sMeansOfDeath = "MOD_EXPLOSIVE";
+	{
+		iDamage = 0;
+		return;
+		//sMeansOfDeath = "MOD_EXPLOSIVE";
+	}
 
 	if( sMeansOfDeath == "MOD_UNKNOWN" )
 		sMeansOfDeath = "MOD_EXPLOSIVE";

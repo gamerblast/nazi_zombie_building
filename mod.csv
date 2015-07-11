@@ -1,3 +1,4 @@
+material,msmbackground
 fx,maps/zombie/fx_zombie_tesla_shock
 rawfile,aitype/axis_zombie_ger_ber_sshonor.gsc
 character,bo1_nazi_body.gsc
@@ -122,6 +123,8 @@ menufile,ui/nazi_zombie_building.menu
 menufile,ui/options_graphics_pc.menu
 menufile,ui/options_game_pc.menu
 menufile,ui/options_msm.menu
+menufile,ui/levels.menu
+menufile,ui\scriptmenus\dukip_attachment_box_01.menu
 sound,menu_music,,all_sp
 xmodel,cannonballtres
 xmodel,viewmodel_hk416
