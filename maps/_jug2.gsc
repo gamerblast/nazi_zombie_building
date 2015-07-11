@@ -29,17 +29,41 @@ exo_jump()
 		{
 			while(self isOnGround() == 0)
 			{
-				if(self useButtonPressed() && self.exo_strength >= 10)
+				if(self useButtonPressed() && self.is_exo_jumping == 0 && self.exo_strength >= 20)
 				{
 					self.is_exo_jumping = 1;
-					self.exo_strength -= 10;
-					self SetVelocity((0, 0, 200));
+					self.exo_strength -= 20;
 					
-					wait(0.1);
+					for(i=0; i<5; i++)
+					{
+						self SetVelocity((0, 0, 1000));
+						wait(0.05);
+					}
+					wait(0.05);
+				}
+				else if(self useButtonPressed() && self.is_exo_jumping == 1 && self.jug_specialist_equipped == 1 && self.specialist_timer == 0)
+				{
+					for(i=0; i<5; i++)
+					{
+						self SetVelocity((0, 0, -1000));
+						wait(0.05);
+					}
+					Earthquake( 0.7, 3, self.origin, 850 );
+					zombies = GetAiSpeciesArray( "axis", "all" );
+					for(i = 0; i < zombies.size; i++) 
+					{ 	
+						distance = DistanceSquared( zombies[i].origin, self.origin );
+						if(distance <= 160000)
+						{
+							zombies[i] DoDamage( zombies[i].health + 666, self.origin, self );
+						}
+					}
+					self.specialist_timer = 60;
+					wait(0.05);
 				}
 				else
 				{
-					wait(0.1);
+					wait(0.05);
 				}
 			}
 			self.is_exo_jumping = 0;
@@ -61,61 +85,61 @@ exo_boost()
 			while(self isOnGround() == 0)
 			{
 				movement = self GetNormalizedMovement();
-				if(self AdsButtonPressed() && movement[0] == 1 && self.exo_strength >= 5)
+				if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[0] == 1 && self.exo_strength >= 15)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 5;
+					self.exo_strength -= 15;
 					
 					angles = self GetPlayerAngles();
 					angle = 90 - angles[1];
 					
-					x = Sin(angle) * 200;
-					y = Cos(angle) * 200;
+					x = Sin(angle) * 1000;
+					y = Cos(angle) * 1000;
 					self setVelocity((x, y, 0));
-					wait(0.1);
+					wait(0.05);
 				}
-				else if(self AdsButtonPressed() && movement[0] == -1 && self.exo_strength >= 5)
+				else if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[0] == -1 && self.exo_strength >= 15)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 5;
+					self.exo_strength -= 15;
 					
 					angles = self GetPlayerAngles();
 					angle = 90 - angles[1];
 					
-					x = -1 * (Sin(angle) * 200);
-					y = -1 * (Cos(angle) * 200);
+					x = -1 * (Sin(angle) * 1000);
+					y = -1 * (Cos(angle) * 1000);
 					self setVelocity((x, y, 0));
-					wait(0.1);
+					wait(0.05);
 				}
-				else if(self AdsButtonPressed() && movement[1] == 1 && self.exo_strength >= 5)
+				else if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[1] == 1 && self.exo_strength >= 15)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 5;
+					self.exo_strength -= 15;
 					
 					angles = self GetPlayerAngles();
 					angle = angles[1] - 90;
 					
-					x = Cos(angle) * 200;
-					y = Sin(angle) * 200;
+					x = Cos(angle) * 1000;
+					y = Sin(angle) * 1000;
 					self setVelocity((x, y, 0));
-					wait(0.1);
+					wait(0.05);
 				}
-				else if(self AdsButtonPressed() && movement[1] == -1 && self.exo_strength >= 5)
+				else if(self AdsButtonPressed() && self.is_exo_boosting == 0 && movement[1] == -1 && self.exo_strength >= 15)
 				{
 					self.is_exo_boosting = 1;
-					self.exo_strength -= 5;
+					self.exo_strength -= 15;
 					
 					angles = self GetPlayerAngles();
 					angle = angles[1] - 90;
 					
-					x = -1 * (Cos(angle) * 200);
-					y = -1 * (Sin(angle) * 200);
+					x = -1 * (Cos(angle) * 1000);
+					y = -1 * (Sin(angle) * 1000);
 					self setVelocity((x, y, 0));
-					wait(0.1);
+					wait(0.05);
 				}
 				else
 				{
-					wait(0.1);
+					wait(0.05);
 				}
 			}
 			self.is_exo_boosting = 0;
@@ -169,10 +193,10 @@ exo_recharge()
 {
 	while(1)
 	{
-		if(self.hasjug2 == 1 && self.exo_strength < 100 && self.is_exo_boosting == 0 && self.is_exo_jumping == 0)
+		if(self.hasjug2 == 1 && self.exo_strength < 100)
 		{
 			self.exo_strength += 1;
-			wait(0.05);
+			wait(1.8);
 		}
 		else
 		{
