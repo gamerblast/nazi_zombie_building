@@ -123,6 +123,7 @@ maps\_zombiemode_weapons.gsc
 maps\createart\nazi_zombie_building_art.gsc
 maps\createfx\nazi_zombie_building_fx.gsc
 maps\dlc3_code.gsc
+maps\Dolphin.gsc
 maps\healing_grenade.gsc
 maps\nazi_zombie_building.csv
 maps\nazi_zombie_building.gsc
