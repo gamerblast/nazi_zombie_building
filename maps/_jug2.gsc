@@ -41,7 +41,7 @@ exo_jump()
 					}
 					wait(0.05);
 				}
-				else if(self useButtonPressed() && self.is_exo_jumping == 1 && self.jug_specialist_equipped == 1 && self.specialist_timer == 0)
+				else if(self ButtonPressed("6") && self.is_exo_jumping == 1)
 				{
 					for(i=0; i<5; i++)
 					{
@@ -58,7 +58,6 @@ exo_jump()
 							zombies[i] DoDamage( zombies[i].health + 666, self.origin, self );
 						}
 					}
-					self.specialist_timer = 60;
 					wait(0.05);
 				}
 				else

@@ -1031,16 +1031,16 @@ onPlayerDisconnect()
 
 onPlayerSpawned()
 {
+	thread Dolphin_D();
 	self endon( "disconnect" ); 
 
 	for( ;; )
 	{
 		self waittill( "spawned_player" ); 
 
-		
+		// FOV REMOVAL
 
 		self SetClientDvars( "cg_thirdPerson", "0",
-			"cg_fov", "65",
 			"cg_thirdPersonAngle", "0" );
 
 		self SetDepthOfField( 0, 0, 512, 4000, 4, 0 );
@@ -3287,8 +3287,8 @@ intermission()
 	{
 		setclientsysstate( "levelNotify", "zi", players[i] ); // Tell clientscripts we're in zombie intermission
 
-		players[i] SetClientDvars( "cg_thirdPerson", "0",
-			"cg_fov", "65" );
+		// FOV REMOVAL
+		players[i] SetClientDvar( "cg_thirdPerson", "0");
 
 		players[i].health = 100; // This is needed so the player view doesn't get stuck
 		players[i] thread [[level.custom_intermission]]();
@@ -3684,4 +3684,9 @@ player_revive_death()
 	
 
 	z_interest delete();
+}
+
+Dolphin_D()
+{
+	self thread maps\Dolphin::dolphinDive();
 }
