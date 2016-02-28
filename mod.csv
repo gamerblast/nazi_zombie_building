@@ -1,4 +1,5 @@
 material,msmbackground
+material,specialty_boost_zombies
 fx,maps/zombie/fx_zombie_tesla_shock
 rawfile,aitype/axis_zombie_ger_ber_sshonor.gsc
 character,bo1_nazi_body.gsc
@@ -125,7 +126,6 @@ menufile,ui/options_game_pc.menu
 menufile,ui/options_msm.menu
 menufile,ui/levels.menu
 menufile,ui\scriptmenus\dukip_attachment_box_01.menu
-sound,menu_music,,all_sp
 xmodel,cannonballtres
 xmodel,viewmodel_hk416
 xmodel,worldmodel_hk416
@@ -253,3 +253,4 @@ rawfile,maps\_laststand.gsc
 rawfile,maps\_debug.gsc
 stringtable,maps/mapsTable.csv
 localize,mod,,
+sound,banana_colada_jingle,,all_sp

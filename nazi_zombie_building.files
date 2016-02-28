@@ -88,6 +88,7 @@ images\mtl_t6_wpn_zmb_mg08_mag_nml.iwi
 images\mtl_t6_wpn_zmb_mg08_nml.iwi
 images\skin_pore_detail_test.iwi
 images\specialty_2x_zombies.iwi
+images\specialty_boost_zombies.iwi
 images\specialty_doubletap_zombies.iwi
 images\specialty_fastreload_zombies.iwi
 images\specialty_instakill_zombies.iwi
@@ -134,7 +135,8 @@ maps\specialists_system.gsc
 maps\zom_counter.gsc
 mod.arena
 mod.csv
-sound\music_mainmenu\garbar_loop.wav
+sound\dankmemes\banana_jingle.wav
+sound\dankmemes\banana_sting.wav
 weapons\sp\dp28_bipod_stand
 weapons\sp\stielhandgranate
 weapons\sp\zombie_an94

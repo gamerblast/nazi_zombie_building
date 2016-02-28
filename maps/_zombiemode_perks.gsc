@@ -30,6 +30,7 @@ init()
 	PrecacheShader( "specialty_fastreload_zombies" );
 	PrecacheShader( "specialty_doubletap_zombies" );
 	PrecacheShader( "specialty_quickrevive_zombies" );
+	PrecacheShader("specialty_boost_zombies"); // BANANA COLADA YOU ALSO HAVE BANANA COLADA STUFF IN DLC3_CODE.gsc
 
 	//PI ESM - sumpf vending machine
 	if (isDefined(level.script) && level.script == "nazi_zombie_sumpf")
@@ -45,6 +46,7 @@ init()
 		PrecacheModel("zombie_vending_doubletap_on");
 		PrecacheModel("zombie_vending_revive_on");
 		PrecacheModel("zombie_vending_sleight_on");
+		PrecacheModel("zombie_vending_banana_on"); // BANANA COLADA
 		precachemodel("zombie_vending_packapunch_on");
 	}
 
@@ -77,6 +79,7 @@ init()
 	level thread turn_doubletap_on();
 	level thread turn_sleight_on();
 	level thread turn_revive_on();
+	level thread turn_banana_on(); // BANANA COLADA ADD THIS METHOD PLS
 	level thread turn_PackAPunch_on();	
 	
 		
@@ -86,6 +89,7 @@ init()
 	level.doubletap_jingle = 0;
 	level.jugger_jingle = 0;	
 	level.packa_jingle = 0;
+	level.banana_jingle = 0; // BANANA COLADA
 	
 }
 
@@ -415,6 +419,23 @@ activate_PackAPunch()
 }
 // PI_CHANGE_END
 
+// BANANA COLADA 
+turn_banana_on()
+{
+	machine = getentarray("vending_banana", "targetname");
+	level waittill("banana_on");
+
+	for( i = 0; i < machine.size; i++ )
+	{
+		machine[i] setmodel("zombie_vending_banana_on");
+		machine[i] vibrate((0,-100,0), 0.3, 0.4, 3);
+		machine[i] playsound("perks_power_on");
+		machine[i] thread perk_fx( "doubletap_light" );
+	}
+
+	level notify( "specialty_boost_power_on" );
+}
+
 turn_sleight_on()
 {
 	machine = getentarray("vending_sleight", "targetname");
@@ -587,7 +608,9 @@ vending_trigger_think()
 		case "specialty_rof":
 			cost = 2000;
 			break;
-
+		case "specialty_boost":
+			cost = 3000;
+			break;
 		}
 
 		if (player maps\_laststand::player_is_in_laststand() )
@@ -659,6 +682,10 @@ vending_trigger_think()
 
 		case "specialty_quickrevive":
 			sound = "mx_revive_sting";
+			break;
+		
+		case "specialty_boost": // BANANA COLADA
+			sound = "mx_banana_sting";
 			break;
 
 		case "specialty_fastreload":
@@ -798,6 +825,10 @@ vending_set_hintstring( perk )
 	case "specialty_rof":
 		self SetHintString( &"ZOMBIE_PERK_DOUBLETAP" );
 		break;
+		
+	case "specialty_boost":
+		self SetHintString("Press & hold &&1 to buy Banana Colada [Cost: 3000]"); // BANANA COLADA
+		break;
 
 	default:
 		self SetHintString( perk + " Cost: " + level.zombie_vars["zombie_perk_cost"] );
@@ -864,7 +895,11 @@ perk_hud_create( perk )
 
 		case "specialty_rof":
 			shader = "specialty_doubletap_zombies";
-			break;			
+			break;	
+			
+		case "specialty_boost": // BANANA COLADA
+			shader = "specialty_boost_zombies";
+			break;	
 
 		default:
 			shader = "";
@@ -932,6 +967,10 @@ perk_give_bottle_begin( perk )
 	case "specialty_rof":
 		weapon = "zombie_perk_bottle_doubletap";
 		break;
+		
+	case "specialty_boost": // BANANA COLADA
+		weapon = "zombie_perk_bottle_doubletap";
+		break;
 	}
 
 	self GiveWeapon( weapon );
@@ -973,6 +1012,10 @@ perk_give_bottle_end( gun, perk )
 		break;
 
 	case "specialty_rof":
+		weapon = "zombie_perk_bottle_doubletap";
+		break;
+	
+	case "specialty_boost": // BANANA Colada
 		weapon = "zombie_perk_bottle_doubletap";
 		break;
 	}
@@ -1042,12 +1085,13 @@ perk_vo(type)
 machine_watcher()
 {
 	//PI ESM - support for two level switches for Factory
-	if (isDefined(level.script) && level.script == "nazi_zombie_factory" || level.script == "nazi_zombie_paris" || level.script == "nazi_zombie_coast")
+	if (isDefined(level.script) && level.script == "nazi_zombie_factory" || level.script == "nazi_zombie_paris" || level.script == "nazi_zombie_coast") // lol wut catacombs and cotd confirm?!?!?!
 	{
 		level thread machine_watcher_factory("juggernog_on");
 		level thread machine_watcher_factory("sleight_on");
 		level thread machine_watcher_factory("doubletap_on");
 		level thread machine_watcher_factory("revive_on");
+		level thread machine_watcher_factory("banana_on"); // BANANA COLADA
 		level thread machine_watcher_factory("Pack_A_Punch_on");
 	}
 	else
@@ -1083,7 +1127,11 @@ machine_watcher_factory(vending_name)
 			
 		case "Pack_A_Punch_on":
 			temp_script_sound = "mx_packa_jingle";
-			break;		
+			break;	
+
+		case "banana_on":
+			temp_script_sound = "mx_banana_jingle"; // BANANA COLADA
+			break;
 		
 		default:
 			temp_script_sound = "mx_jugger_jingle";
@@ -1117,6 +1165,10 @@ play_vendor_stings(sound)
 	if(!IsDefined (level.jugger_jingle))
 	{
 		level.jugger_jingle = 0;
+	}
+	if(!IsDefined (level.banana_jingle)) // BANANA COLADA
+	{
+		level.banana_jingle = 0;
 	}
 	if(!IsDefined (level.packa_jingle))
 	{
@@ -1182,6 +1234,17 @@ play_vendor_stings(sound)
 			level.packa_jingle = 0;
 			temp_org_pack_s delete();
 //			iprintlnbold("stinger packapunch:"  + level.packa_jingle);
+		}
+		else if(sound == "mx_banana_sting" && level.banana_jingle == 0) // BANANA COLADA
+		{
+			level.banana_jingle = 1;
+//			iprintlnbold("stinger bananacolada:" + level.banana_jingle);
+			temp_org_banana_s = spawn("script_origin", self.origin);		
+			temp_org_banana_s playsound (sound, "sound_done");
+			temp_org_banana_s waittill("sound_done");
+			level.banana_jingle = 0;
+			temp_org_banana_s delete();
+//			iprintlnbold("stinger bananacolada:"  + level.banana_jingle);
 		}
 	}
 }
@@ -1255,6 +1318,15 @@ perks_a_cola_jingle()
 				temp_org_packa waittill("sound_done");
 				level.packa_jingle = 0;
 				temp_org_packa delete();
+			}
+			if(self.script_sound == "mx_banana_jingle" && level.banana_jingle == 0) // BANANA COLADA
+			{
+				level.banana_jingle = 1;
+				temp_org_banana = spawn("script_origin", self.origin);
+				temp_org_banana playsound (self.script_sound, "sound_done");
+				temp_org_banana waittill("sound_done");
+				level.banana_jingle = 0;
+				temp_org_banana delete();
 			}
 
 			self thread play_random_broken_sounds();

@@ -973,6 +973,8 @@ power_electric_switch_on()
 	wait_network_frame();
 	level notify( "sleight_on" );
 	wait_network_frame();
+	level notify( "banana_on" ); //BANANA COLADA
+	wait_network_frame();
 	level notify( "revive_on" );
 	wait_network_frame();
 	level notify( "doubletap_on" );
